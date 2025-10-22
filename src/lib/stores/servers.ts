@@ -2,9 +2,10 @@ import { writable } from 'svelte/store';
 import { ecrireDansLocalStorage, lireDepuisLocalStorage } from '$lib/services/storage';
 
 const STORAGE_KEY = 'dofus-serveurs';
+const SERVEURS_DEFAUT = ['Echo', 'Ilyzaelle', 'Ombre'];
+
 function creerStore() {
-        // ✅ On lit la liste depuis le stockage local sans imposer de serveurs par défaut
-        const initial = lireDepuisLocalStorage<string[]>(STORAGE_KEY, []);
+        const initial = lireDepuisLocalStorage<string[]>(STORAGE_KEY, SERVEURS_DEFAUT);
         const { subscribe, set, update } = writable<string[]>([...new Set(initial)]);
 
         subscribe((valeur) => ecrireDansLocalStorage(STORAGE_KEY, valeur));

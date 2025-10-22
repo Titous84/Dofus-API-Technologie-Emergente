@@ -9,7 +9,6 @@
         let equipement: Equipement | undefined;
         let panoplie: any = null;
 
-        // 🔍 Synchronise la page avec le paramètre d'URL encodé
         $: nomRecherche = decodeURIComponent($page.params.nom ?? '');
         $: equipement = $equipementsStore.find((item) => item.nom === nomRecherche);
         $: panoplie = equipement ? getPanoplieParEquipement(equipement.nom) : null;
@@ -50,7 +49,6 @@
         }
 
         function mettreAJourPrix(serveur: string, valeur: string) {
-                // 💾 Enregistre immédiatement la valeur saisie manuellement pour ce serveur
                 if (!equipement) return;
                 const prix = Number(valeur.replace(',', '.'));
                 equipementsStore.definirPrix(
@@ -83,30 +81,26 @@
 
         <section class="prix">
                 <h2>Prix par serveur</h2>
-                {#if $serversStore.length === 0}
-                        <p class="info">Ajoutez un serveur depuis la liste des équipements pour pouvoir saisir un prix.</p>
-                {:else}
-                        <div class="grille">
-                                {#each $serversStore as serveur}
-                                        <label>
-                                                <span>{serveur}</span>
-                                                <input
-                                                        type="number"
-                                                        min="0"
-                                                        step="1"
-                                                        value={equipement.prixParServeur?.[serveur] ?? ''}
-                                                        on:change={(event) =>
-                                                                mettreAJourPrix(
-                                                                        serveur,
-                                                                        (event.currentTarget as HTMLInputElement).value
-                                                                )
-                                                        }
-                                                />
-                                                <small>{formatPrix(equipement.prixParServeur?.[serveur])}</small>
-                                        </label>
-                                {/each}
-                        </div>
-                {/if}
+                <div class="grille">
+                        {#each $serversStore as serveur}
+                                <label>
+                                        <span>{serveur}</span>
+                                        <input
+                                                type="number"
+                                                min="0"
+                                                step="1"
+                                                value={equipement.prixParServeur?.[serveur] ?? ''}
+                                                on:change={(event) =>
+                                                        mettreAJourPrix(
+                                                                serveur,
+                                                                (event.currentTarget as HTMLInputElement).value
+                                                        )
+                                                }
+                                        />
+                                        <small>{formatPrix(equipement.prixParServeur?.[serveur])}</small>
+                                </label>
+                        {/each}
+                </div>
         </section>
 
         {#if equipement.effets}
@@ -220,11 +214,6 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.35rem;
-        }
-
-        .info {
-                color: rgba(226, 232, 240, 0.75);
-                margin: 0;
         }
 
         .grille input {

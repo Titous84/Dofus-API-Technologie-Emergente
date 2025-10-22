@@ -8,7 +8,7 @@ const STORAGE_KEY = 'dofus-equipements-utilisateur';
 type ResumeImport = {
         ajoutes: number;
         misAJour: number;
-        ignores: number;
+        ignorés: number;
         inconnus: Set<string>;
 };
 
@@ -75,7 +75,7 @@ function creerStore() {
                         .filter(Boolean);
 
                 if (lignes.length === 0) {
-                        return { ajoutes: 0, misAJour: 0, ignores: 0, inconnus: new Set() };
+                        return { ajoutes: 0, misAJour: 0, ignorés: 0, inconnus: new Set() };
                 }
 
                 const separateur = lignes[0].includes(';') ? ';' : ',';
@@ -129,7 +129,7 @@ function creerStore() {
                         return Array.from(map.values());
                 });
 
-                return { ajoutes, misAJour, ignores, inconnus };
+                return { ajoutes, misAJour, ignorés: ignores, inconnus };
         }
 
         return {
