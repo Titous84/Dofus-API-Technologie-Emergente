@@ -49,7 +49,7 @@
 			'Retrait PM': 'retraitPM',
 			'Esquive PA': 'esquivePA',
 			'Esquive PM': 'esquivePM',
-			'% Critique': 'cc',
+			'% Critique': 'critique',
 			'Dommage(s)': 'dommages',
 			Initiative: 'initiative',
 			'% Résistance Neutre': 'resNeutre',
@@ -57,7 +57,8 @@
 			'% Résistance Feu': 'resFeu',
 			'% Résistance Eau': 'resEau',
 			'% Résistance Air': 'resAir',
-			'% Résistance Critiques': 'resCrit',
+			'Résistance(s) Critiques': 'resCrit',
+			'Invocation(s)': 'invocation',
 			'% Résistance Poussée': 'resPoussee'
 		};
 
