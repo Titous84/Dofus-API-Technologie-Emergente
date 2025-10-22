@@ -11,15 +11,14 @@
         let enEdition: Equipement | null = null;
         let resultatImport: string | null = null;
 
-        // 📦 Les serveurs sont maintenus localement et totalement personnalisables
         $: listeServeurs = $serversStore;
-        // 📝 Filtrage en direct selon la recherche de l'utilisateur
         $: listeEquipements = $equipementsStore
                 .filter((equipement) => equipement.nom.toLowerCase().includes(recherche.toLowerCase()))
                 .sort((a, b) => a.nom.localeCompare(b.nom));
 
+        $: serveurSelectionne = serveurSelectionne || listeServeurs[0] || '';
+
         function demarrerCreation() {
-                // 🆕 Prépare un nouveau formulaire d'équipement vierge
                 enEdition = {
                         nom: '',
                         niveau: 1,
@@ -30,7 +29,6 @@
         }
 
         function editer(equipement: Equipement) {
-                // ✏️ On clone l'équipement pour éviter de modifier la version du store tant que ce n'est pas sauvegardé
                 enEdition = structuredClone(equipement);
         }
 
@@ -55,7 +53,6 @@
         }
 
         function mettreAJourPrix(serveur: string, valeur: string) {
-                // 💰 Conversion du champ texte en nombre tout en acceptant la virgule comme séparateur
                 if (!enEdition) return;
                 const prix = Number(valeur.replace(',', '.'));
                 if (!enEdition.prixParServeur) {
@@ -90,7 +87,6 @@
         }
 
         function exporterListe() {
-                // 📤 Prépare une exportation simple pour conserver vos estimations locales
                 const lignes = [
                         ['Nom', 'Niveau', 'Type', 'Description', 'Serveur', 'Prix']
                 ];
@@ -120,8 +116,8 @@
         <div>
                 <h1>Gestion des équipements</h1>
                 <p>
-                        Recherchez, modifiez et enrichissez votre base locale. Les prix sont saisis manuellement pour suivre vos
-                        propres estimations, indépendamment des serveurs officiels.
+                        Recherchez, modifiez et enrichissez votre base locale. Ajoutez des prix par serveur pour alimenter les
+                        calculs des sets et comparatifs.
                 </p>
         </div>
         <div class="actions">
@@ -138,7 +134,6 @@
         <label>
                 <span>Serveur suivi</span>
                 <select bind:value={serveurSelectionne}>
-                        <option value="">Tous les serveurs</option>
                         {#each listeServeurs as serveur}
                                 <option value={serveur}>{serveur}</option>
                         {/each}
@@ -173,12 +168,7 @@
                                 <th>Nom</th>
                                 <th>Niveau</th>
                                 <th>Type</th>
-                                <th>
-                                        Prix
-                                        {serveurSelectionne
-                                                ? ` (${serveurSelectionne})`
-                                                : ' (sélectionnez un serveur)'}
-                                </th>
+                                <th>Prix {serveurSelectionne ? `(${serveurSelectionne})` : ''}</th>
                                 <th></th>
                         </tr>
                 </thead>
