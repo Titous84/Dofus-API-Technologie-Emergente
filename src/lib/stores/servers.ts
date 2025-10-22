@@ -11,6 +11,7 @@ function creerStore() {
         subscribe((valeur) => ecrireDansLocalStorage(STORAGE_KEY, valeur));
 
         function ajouter(serveur: string) {
+                // ➕ Permet d'ajouter un serveur personnalisé pour vos suivis locaux
                 if (!serveur.trim()) {
                         return;
                 }
