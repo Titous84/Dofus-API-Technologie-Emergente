@@ -1,38 +1,89 @@
-# sv
+# 📦 Dofus API - Technologie Émergente
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Ce projet est une application web développée avec **SvelteKit**.  
+Elle permet de naviguer dans les **équipements de Dofus**, consulter leurs **effets**, **recettes** et **panoplies** associées.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🔧 Technologies utilisées
 
-```sh
-# create a new project in the current directory
-npx sv create
+- ✅ [SvelteKit](https://kit.svelte.dev/) – Framework moderne fullstack
+- ✅ TypeScript
+- ✅ JSON statique comme base de données (fichiers locaux)
+- ✅ HTML/CSS
+- ✅ Vite (serveur de développement)
 
-# create a new project in my-app
-npx sv create my-app
-```
+---
 
-## Developing
+## 🚀 Lancer le projet localement
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### 1. Cloner le dépôt
 
-```sh
+git clone https://github.com/Titous84/Dofus-API-Technologie-Emergente.git
+cd Dofus-API-Technologie-Emergente
+
+2. Installer les dépendances
+
+npm install
+
+3. Lancer le serveur de développement
+
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Ensuite, ouvre le navigateur à l'adresse :
+👉 http://localhost:5173
 
-## Building
+🧭 Fonctionnalités
+📋 Page d'accueil
+- Accès à la liste des équipements
 
-To create a production version of your app:
+🛡️ Équipements
+- Affichage du nom, niveau, type, description
+- Illustration de l’équipement
+- Effets avec icônes (ex: Vitalité, Force, PA...)
+- Recette de craft avec images des ressources
 
-```sh
-npm run build
-```
+🧢 Panoplies
+- Si l’équipement fait partie d’une panoplie, les autres objets sont listés avec des liens
 
-You can preview the production build with `npm run preview`.
+📁 Structure du projet
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+├── src/
+│   ├── lib/
+│   │   ├── data/              # Données JSON (équipements, ressources, panoplies)
+│   │   └── services/          # Fonctions pour accéder aux données
+│   └── routes/
+│       ├── +page.svelte       # Page d’accueil
+│       └── equipements/
+│           ├── +page.svelte   # Liste des équipements
+│           └── [nom]/+page.svelte  # Page de détail d’un équipement
+├── static/                    # Fichiers statiques
+├── package.json
+└── README.md
+
+🗃️ Données utilisées
+Les données sont basées sur des fichiers .json stockés localement dans src/lib/data/ :
+- equipements.json
+- ressources.json
+- panoplie.json
+
+Les images proviennent de :
+- https://api.dofusdb.fr/img/items/
+- https://dofusdb.fr/icons/effects/
+
+🔄 À venir (TODO)
+- 🔍 Recherche d’équipements
+- 📦 Filtrer par type d’équipement (anneau, amulette, etc.)
+- 🧮 Affichage des bonus de panoplie
+- 🎨 Amélioration du style CSS
+- 🌐 Déploiement en ligne (ex: Vercel, Netlify)
+
+🙋‍♂️ Auteur
+- 👤 Titous84
+- GitHub : github.com/Titous84
+
+📜 Licence
+Ce projet est à but éducatif. Les données et images utilisées proviennent de Dofus et Ankama.
+Aucune réutilisation commerciale n’est prévue.
+
+---
